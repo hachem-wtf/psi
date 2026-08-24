@@ -75,7 +75,7 @@ Realistic quantum noise simulation using Kraus operators:
 | `bit_phase_flip(p)` | $Y$ error with probability $p$ |
 
 ```rust
-use libpsi_core::{DensityMatrix, NoiseChannel};
+use psi::{DensityMatrix, NoiseChannel};
 
 // Create density matrix from circuit state
 let dm = DensityMatrix::from_state_vector(&state_vec);
@@ -91,16 +91,18 @@ println!("Fidelity: {}", dm.fidelity_with_pure_state(&ideal_state));
 
 ## Project Structure
 
-- **`libpsi-core`**: Core quantum simulation library
-  - `core`: Quantum gates, circuits, registers, and runtimes
-  - `maths`: Complex numbers, vectors, matrices, SIMD operations
-- **`libpsi-visualizer`**: Circuit visualisation (ASCII horizontal/vertical)
-- **`tester`**: Comprehensive test suite and benchmarks
+`psi` is a single crate. The library lives under `src/`:
+
+- **`core`**: Quantum gates, circuits, registers, and runtimes
+- **`maths`**: Complex numbers, vectors, matrices, SIMD operations
+- **`visualizer`**: Circuit visualisation (ASCII horizontal/vertical)
+
+The comprehensive test suite and benchmarks live in **`examples/tester`**.
 
 ## Quick Start
 
 ```rust
-use libpsi_core::{QuantumCircuit, Runtime};
+use psi::{QuantumCircuit, Runtime};
 
 fn main() {
     let mut circuit = QuantumCircuit::new(3);
@@ -118,7 +120,7 @@ fn main() {
 ### Composable Runtimes
 
 ```rust
-use libpsi_core::{QuantumCircuit, RuntimeConfig};
+use psi::{QuantumCircuit, RuntimeConfig};
 
 let mut circuit = QuantumCircuit::new(8);
 // ... add gates ...
@@ -147,7 +149,7 @@ circuit
 ### Custom Gates
 
 ```rust
-use libpsi_core::{CustomGateBuilder, CustomGate, complex, matrix};
+use psi::{CustomGateBuilder, CustomGate, complex, matrix};
 
 // From operations
 let bell_gate = CustomGateBuilder::new("BELL", 2)
@@ -166,13 +168,13 @@ let sqrt_x = CustomGate::from_matrix("√X", sqrt_x_matrix);
 ## Running Tests
 
 ```bash
-cargo run --package tester --release           # All tests
-cargo run --package tester --release -- clifford
-cargo run --package tester --release -- non-clifford
-cargo run --package tester --release -- kernels
-cargo run --package tester --release -- simd
-cargo run --package tester --release -- bench
-cargo run --package tester --release -- help
+cargo run --release --example tester           # All tests
+cargo run --release --example tester -- clifford
+cargo run --release --example tester -- non-clifford
+cargo run --release --example tester -- kernels
+cargo run --release --example tester -- simd
+cargo run --release --example tester -- bench
+cargo run --release --example tester -- help
 ```
 
 ## Disclaimer
