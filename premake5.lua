@@ -98,13 +98,13 @@ project "tester"
 	setup_c_target()
 
 	files {
-		"examples/tester/**.h",
-		"examples/tester/**.c",
+		"tester/**.h",
+		"tester/**.c",
 	}
 
 	includedirs {
 		"src",
-		"examples/tester",
+		"tester",
 	}
 
 	links "psi"
