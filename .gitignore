@@ -1,10 +1,29 @@
+.DS_Store
+.cache/
+
+.vs/
 .vscode/
 .idea/
-.vs/
 
+compile_flags.txt
+compile_commands.json
+
+# premake / build output
+bin/
+bin-int/
+build/
+builddir/
+
+*.make
+Makefile
+
+*.sln
+*.vcxproj
+*.vcxproj.*
+
+# rust (reference sources during the port)
 debug/
 target/
-
 Cargo.lock
 **/*.rs.bk
 *.pdb

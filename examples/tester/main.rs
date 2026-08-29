@@ -67,6 +67,7 @@ fn main() {
     if run_clifford {
         clifford::run_all(&mut results);
     }
+    
 
     if run_non_clifford {
         non_clifford::run_all(&mut results);
@@ -91,6 +92,7 @@ fn main() {
     if run_bench {
         benchmarks::run_all(&mut results);
     }
+    
 
     if !results.is_empty() {
         print_benchmark_table(&results);
