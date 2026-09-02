@@ -14,7 +14,6 @@ static enum PsiVectorKind flip_kind(enum PsiVectorKind kind)
 
 struct PsiVector psi_new_vector(size_t size, enum PsiVectorKind kind)
 {
-	// all-zero bits == 0.0 for both components
 	struct PsiComplex *data = calloc(size, sizeof(struct PsiComplex));
 	assert(data != NULL || size == 0);
 
@@ -87,7 +86,6 @@ struct PsiComplex psi_sum_vector(struct PsiVector v)
 	return sum;
 }
 
-// ordering mirrors rust's derived PartialOrd: real first, then imaginary
 static int less_than(struct PsiComplex a, struct PsiComplex b)
 {
 	if (a.real != b.real)

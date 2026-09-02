@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "maths/complex.h"
+#include "maths/matrix.h"
 #include "maths/vector.h"
 #include "psi.h"
 
@@ -37,6 +38,27 @@ int main(void)
 
 	psi_free_vector(&u);
 	psi_free_vector(&v);
+
+	struct PsiMatrix m = psi_matrix(2, 2,
+		psi_new_complex(1.0, 0.0), psi_new_complex(2.0, 0.0),
+		psi_new_complex(3.0, 0.0), psi_new_complex(4.0, 0.0));
+	struct PsiMatrix mm = psi_dot_matrix(m, m);
+
+	printf("m*m     = [%g %g; %g %g]\n",
+		psi_get_matrix(mm, 0, 0).real, psi_get_matrix(mm, 0, 1).real,
+		psi_get_matrix(mm, 1, 0).real, psi_get_matrix(mm, 1, 1).real);
+
+	struct PsiVector x = psi_column_vector(
+		psi_new_complex(1.0, 0.0),
+		psi_new_complex(1.0, 0.0));
+	struct PsiVector mx = psi_mul_vector_matrix(x, m);
+
+	printf("m*x     = [%g, %g]\n", mx.data[0].real, mx.data[1].real);
+
+	psi_free_vector(&x);
+	psi_free_vector(&mx);
+	psi_free_matrix(&m);
+	psi_free_matrix(&mm);
 
 	return 0;
 }

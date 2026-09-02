@@ -10,7 +10,6 @@ enum PsiVectorKind
 	PSI_COLUMN_VECTOR,
 };
 
-// owns a heap allocation in `data`; release it with psi_free_vector
 struct PsiVector
 {
 	struct PsiComplex *data;
@@ -23,7 +22,6 @@ struct PsiVector psi_new_vector_from(const struct PsiComplex *data, size_t size,
 struct PsiVector psi_clone_vector(struct PsiVector v);
 void psi_free_vector(struct PsiVector *v);
 
-// convenience builders, mirroring the row_vector!/column_vector! macros
 #define psi_row_vector(...) \
 	psi_new_vector_from((struct PsiComplex[]){ __VA_ARGS__ }, \
 		sizeof((struct PsiComplex[]){ __VA_ARGS__ }) / sizeof(struct PsiComplex), \
